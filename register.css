@@ -1,0 +1,36 @@
+.container {
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    color: black;
+
+}
+
+input {
+    padding: 10px;
+    border-radius: 20px;
+}
+
+body {
+    background-image: url(image/kep04.jpg);
+
+}
+
+a {
+    font-size: 30px;
+}
+
+label {
+    font-size: 27px;
+    color: red;
+
+}
+
+#button {
+    background-color: green;
+    border-radius: 20px;
+}
+
+p {
+    font-size: 23px;
+}

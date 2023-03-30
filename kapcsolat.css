@@ -1,0 +1,201 @@
+body {
+    background-image: url(image/veg_rolunk_ph.jpg);
+    color: #662210;
+    font-size: 27px;
+    font: 14px/24px Verdana, Geneva, sans-serif;
+}
+
+/*Méretezés */
+form {
+    text-align: left;
+    padding: 10px;
+    width: 600px;
+}
+
+.felasznalo input {
+    width: 220px;
+    height: 22px;
+}
+
+form textarea {
+    width: 440px;
+    height: 150px;
+}
+
+/*Pozicionálás */
+.label_1 {
+    display: block;
+    width: 70px;
+    float: left;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.targy input {
+    margin-left: 140px;
+}
+
+.felasznalo span {
+    display: inline-block;
+    color: #ff0000;
+    margin-left: 15px;
+    font-size: 0.92em;
+    width: 220px;
+    text-align: center;
+    background-color: #446644;
+    color: #ffffff;
+    border-radius: 10px 20px 30px 40px;
+    padding-left: 5px;
+    opacity: .6;
+}
+
+/*Nyomógom */
+form input[type="submit"] {
+    display: inline-block;
+    background-color: #000000;
+    font-size: 18px;
+    height: 42px;
+    width: 115px;
+    padding: 0;
+    border: none;
+    text-align: center;
+    color: #ffffff;
+}
+
+form input[type="submit"]:hover {
+    background-color: #446644;
+    padding: 0;
+    height: 42px;
+}
+
+form input[type="submit"]:active {
+    background-color: #00ff00;
+    padding-top: 2px;
+    height: 42px;
+}
+
+.submit {
+    text-align: center;
+}
+
+
+/*Elemcsoport csinosítás */
+form {
+    background-color: #eeccc0;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 15px 0px #662210;
+}
+
+fieldset {
+    background-color: #ffddcc;
+    color: #662210;
+    border-width: 1px;
+    border-color: #662210;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    box-shadow: 5px 5px 15px 0px #662210;
+}
+
+legend {
+    color: #ffffff;
+    background-color: #662210;
+    border-radius: 10px 20px 30px 40px;
+    padding: 2px 16px;
+}
+
+form h2 {
+    text-align: left;
+    margin: 5px 20px 20px 20px;
+    font-style: italic;
+}
+
+/* Űrlapelemek árnyék keret */
+form input[type=text],
+form input[type=email],
+form input[type=url],
+form textarea {
+    padding-left: 5px;
+    border: 1px solid #662210;
+    box-shadow: 0 0 3px #eeccc0, inset 0 -10px 20px #eeccc0;
+    border-radius: 20px;
+}
+
+/* placeholder - Az Opera nem támogatja*/
+
+input::-webkit-input-placeholder {
+    color: #446644;
+    font-style: italic;
+    opacity: .6;
+}
+
+input:-ms-input-placeholder {
+    color: #446644;
+    font-style: italic;
+    opacity: .6;
+}
+
+input:-moz-placeholder,
+input::-moz-placeholder {
+    color: #446644;
+    font-style: italic;
+    opacity: .6;
+}
+
+/* Körvonal kezelése*/
+form input,
+form textarea,
+form button {
+    outline: none;
+}
+
+form input:focus,
+form textarea:focus {
+    border: 1px solid #446644;
+    box-shadow: 0 0 3px #446644;
+}
+
+form input:focus:invalid,
+form textarea:focus:invalid,
+form input:focus:not(:required):invalid,
+form textarea:focus:not(:required):invalid {
+    color: #880000;
+}
+
+form input:required,
+form textarea:required {
+    background-position: 99% 10px;
+}
+
+form input:focus+span {
+    margin-left: 15px;
+    opacity: 1;
+}
+
+form input:focus::label {
+    color: #0000ff;
+}
+
+p>label {
+    -moz-transition: color 1s ease;
+    -o-transition: color 1s ease;
+    -webkit-transition: color 1s ease;
+    transition: color 1s ease;
+}
+
+p:focus>label {
+    color: #f00;
+
+}
+
+footer {
+    text-align: center;
+    padding: 3px;
+    background-color: rgb(216, 54, 0);
+    color: white;
+}
+
+#bu {
+    border-radius: 20px;
+    background-color: #0000ff;
+}

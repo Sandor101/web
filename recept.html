@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="bootstrap-4.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+    
+  <title>Receptek</title>
+  <style>
+body{
+    background-image: url(image/kep04.jpg);
+}
+
+.container{
+    width: auto;
+    height: auto;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 4px 4px 30px rgba(0, 0, 0, 0.06);
+    padding: 20px;
+    overflow-y: scroll;
+    
+}
+
+.container form {
+    width: 100%;
+    border: 1px solid rgb(82, 74, 235);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.container form input{
+    border: none;
+    outline: none;
+    box-shadow: none;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: aquamarine;
+    padding: 8px 10px;
+}
+
+.container form i{
+    padding-left: 10px;
+}
+
+.product-list{
+    padding: 20px 0;
+}
+
+.product{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding-bottom: 15px;
+}
+
+.product .p-details {
+    padding-left: 15px;
+}
+.product .p-details h2{
+    font-size: 32px;
+    color: brown;
+}
+.product .p-details h3{
+    font-size: 27px;
+    color:chocolate;
+}
+  </style>
+</head>
+
+<body >
+  <nav class="navbar navbar-expand-lg navbar-light bg-warning">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="fo.html">Vegetár</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="login.php">Bejelentkezés</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="signup.php">Regisztráció</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="rendeles.php">Rendelés</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="hozzavalo.php">Hozzávalók</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="kapcs.html">Kapcsolat</a>
+          </li>
+        </ul>
+
+      </div>
+  </nav>
+
+  <section class="container">
+    <form>
+      <i class="fas fa-search"></i>
+      <input type="text" name="" id="search-item" placeholder="Kereső" onkeyup="search()">
+    </form>
+    <div class="product-list" id="product-list">
+      <div class="product">
+        <div class="p-details">
+          <h2>Hideg tészta saláta</h2>
+          <h3>Hozzávalók:</h3>
+          <h6>Bio Zentrale BIO penne rigate teljes kiőrlésű durumbúza tészta (500g): 100g
+            <br>cukkini: 3x adag (100g)
+            <br>uborka: 2x 100g
+            <br>citrom: kis darab (100g)
+            <br>füstölt tofu: 3,6x adag (100g)
+            <br>friss avokádó: adag (100g)
+            <br>Bonduelle kukorica: adag (140g)
+            <br>lencse: 5x adag (50g)
+            <br>Kókusz joghurt natur We Love Coco: 2x adag (125g)
+            <br>koktélparadicsom: 100g
+          </h6>
+          <h3>Elkészítés:</h3>
+          <h6>1. Felszeleteljük a zöldségeket: cukkini, uborka, paradicsom, hagyma. Eközben egy lábasban vizet forralunk a tésztának.
+            <br>2. A cukkinit és a tofut egy kevés olívaolajon mindkét oldaláról meggrillezzük. Sóval, borssal, füstölt paprikával fűszerezzük. Ha kész, félretesszük.
+            <br>3. A kókuszjoghurtokat sóval, borssal és citromlével kikeverünk.
+            <br>4. Ha megfőtt a tészta, leszűrjük. Egy nagy tálban összekeverjük az összes felkockázott zöldséggel, a lencsével, kukoricával és a tofuval, majd ráöntjük az elkészített öntetet.
+            <br>5. Azonnal fogyasztva, vagy akár hidegen is kíváló.
+          </h6>
+          <h3>Tápértékek:</h3>
+          <h6>Energia érték: 2294kcal
+            <br>Fehérje: 149g
+            <br>Szénhidrát: 276g
+            <br>Cukor: 45g
+            <br>Zsír: 60g
+            <br>Telített zsírsavak: 14g
+            <br>Egyszeresen telítetlen: 0,56g
+            <br>Többszörösen telítetlen: 2g
+            <br>Rost: 49g
+            <br>Só: 2g
+            <br>Víz: 589g
+            <br>Kalcium: 1134mg
+            <br>PHE: 6835mg
+          </h6>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="p-details">
+          <h2>Articsókaszív paradicsommal és olívabogyókkal</h2>
+          <h3>Hozzávalók:</h3>
+          <h6>16 közepes db articsóka (konzerv )
+          <br>16 db koktélparadicsom
+          <br>15 dkg zöld olajbogyó (magozott)
+          <br>15 dkg fekete olajbogyó (magozott)
+          <br>2 gerezd fokhagyma
+          <br>3 ek balzsamecet
+          <br>só ízlés szerint
+          <br>bors ízlés szerint
+          <br>5 ek olívaolaj
+          <br>2 ek bazsalikom (friss, apróra vágva)
+          </h6>
+          <h3>Elkészítés:</h3>
+          <h6>1. Az articsókaszíveket leszűrjük, majd negyedeljük. A paradicsomot megmossuk, szárazra töröljük és felezzük. Az olívabogyókat leszűrjük. Az egészet egy tálba tesszük és jól összekeverjük.
+            <br>2. A fokhagymát megpucoljuk és fokhagymaprésen átnyomjuk. Az ecetet összekeverjük a fokhagymával, sóval, borssal, majd az olajat is jól beledolgozzuk.
+            <br>3. Az öntetet a salátához adjuk, megszórjuk bazslikommmal és jól összekavarjuk.
+            <br>4. A salátát kb. 30 percig állni hagyjuk (közben megkeverjük), hogy az ízek összeérjenek.
+          </h6>
+          <h3>Tápértékek:</h3>
+          <h6>Energia adagonként: 434Kcal
+            <br>Fehérje: 18,1g
+            <br>Zsír: 19,1g
+            <br>Szénhidrátok: 62,1g
+          </h6>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="p-details">
+          <h2>Hideg tészta saláta friss gyógynövényekkel</h2>
+          <h3>Hozzávalók:</h3>
+          <h6>10 oz. dugóhúzó (rotini) tészta
+            <br>1/4 csésze extra szűz olívaolaj (osztva)
+            <br>3 gerezd fokhagyma (darált)
+            <br>1/4 csésze friss bazsalikom (apróra vágva)
+            <br>1/4 csésze friss petrezselyem (apróra vágva)
+            <br>1/4 csésze fenyőmag
+            <br>1/4 csésze parmezán sajttal (reszelt)
+            <br>1 evőkanál. citromlé
+            <br>Dash tengeri só vagy kóser só (ízlés szerint)
+            <br>Dash őrölt fekete bors (ízlés szerint)
+          </h6>
+          <h3>Elkészítés:</h3>
+          <h6>1. Először készítsd el a tésztát a csomag utasításai szerint. Csatolja le és engedje lehűlni. Gyors tipp: A legtöbb ember javasolja főzött tésztafélét erősen sózott vízben, amikor tésztaalátét főz, hogy maximalizálja az ízt. "Erősen sózva" azt jelenti, hogy legalább egy teljes evőkanálnyi só megy a vízbe, és néhány ember két teljes evőkanál sót javasol. Ez egy személyes preferencia, de hozzá egy szép íz. Tőled függ.
+            <br>2. Az extra szűz olívaolaj felét (kb. 2 evőkanál) melegítsük fel egy nagy serpenyőbe, és hozzáadjuk a darált fokhagymát közepes hőséghez. Főzzük csak egy-két percig, kevergetve, majd csökkentjük a hőt alacsonyra, és adjunk hozzá apróra vágott friss bazsalikomot és petrezselymet.
+            <br>3. Főzzük csak egy percig, amíg melegítjük. Csak azt szeretné, hogy a friss fűszernövények finoman felmelegedjenek, hogy a lehető legtöbbet szabadítsák fel, de nem akarják, hogy valóban elkezdhessenek, vagy elkezdjenek főzni.
+            <br>4. Távolítsa el a gyógynövényeket a hőtől és engedje lehűlni.
+            <br>5. Egy nagy tálban egyesítsük a főtt és lecsapolt tésztát az összes többi összetevővel, beleértve a főtt fokhagymát és fűszernövényeket, a maradék olívaolajat, citromlevet, fenyőmagot és parmezán sajtot.
+            <br>6. Szezonban nagylelkűen sóval és borssal, ízlés szerint.
+            <br>7. Dobja jól a tészta saláta és hideg. Azt is szeretné, hogy a hűtőszekrényben egy-két óráig hideg legyen, mielőtt kiszolgálja, hogy az ízek valóban fejlődjenek.
+          </h6>
+          <h3>Tápértékek:</h3>
+          <h6>Kalória: 352kcal
+            <br>Összes zsír: 15g
+            <br>Telített zsír: 2g
+            <br>Telítetlen zsír: 8g
+            <br>koleszterin: 3mg
+            <br>Nátrium: 104mg
+            <br>Szénhidrát: 46g
+            <br>Élelmi rost: 4g
+            <br>Fehérje: 10g
+          </h6>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="p-details">
+          <h2>Kukorica-krémleves</h2>
+          <h3>Hozzávalók (4 főre):</h3>
+          <h6>1 konzerv kukorica (340 g-os kiszerelés)
+            <br>30 ml étolaj
+            <br>1 fej vöröshagyma (130 g/fej)
+            <br>2 gerezd fokhagyma
+            <br>150 ml habtejszín
+            <br>400 ml víz
+            <br>só, bors
+            <br>1 csipet Cayenne-bors
+          </h6>
+          <h3>A tálaláshoz hozzávalók:</h3>
+          <h6>1 szál újhagyma
+            <br>1 csokor koriander
+            <br>1 db lime
+            <br>1 tk chilipehely
+            <br>40 g tortillachips</h6>
+          <h3>Elkészítés:</h3>
+          <h6>1. A kukorica-krémleves elkészítéséhez a kukoricát lecsepegtetjük és egy sütőpapírral bélelt tepsire tesszük, majd berakjuk a 230 fokra előmelegített sütőbe 8-10 percre. 
+            <br>2. Olajat melegítünk egy lábasban, majd hozzáadjuk a finomra vágott hagymát és 1 perc pirítás után a zúzott fokhagymát is. 
+            <br>3. Beleszórjuk a megsütött kukoricát, felöntjük a tejszínnel és a vízzel, sózzuk, borsozzuk, valamint ízesítjük Cayenne-borssal.
+            <br>4. Egyet forralunk rajta, majd egy botmixer segítségével az egészet leturmixoljuk. A megszokottnál kicsit tovább turmixoljuk, ugyanis a kukorica héja ezt igényli. 
+            <br>5. Tányérba szedjük a levest és karikára vágott újhagymával, friss korianderrel, limegerezddel, chilipehellyel és a tortillachipsszel tálaljuk.           
+          </h6>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="p-details">
+          <h2>Kecskesajtos brokkoliburger céklaketchuppal</h2>
+          <h3>Hozzávalók (3 burgerhez):</h3>
+          <h6>A brokkolibucihoz:<br><br>
+            500 g brokkoli
+            <br>200 g finomliszt
+            <br>100 g teljes kiőrlésű tönkölyliszt
+            <br>75 g mandulaliszt
+            <br>1 tk fokhagymapor
+            <br>2 ek sörélesztőpehely
+            <br>1 csomag sütőpor (12 g-os kiszerelés)
+            <br>só, bors
+            <br>4 db tojás
+            <br>2 ek fekete köménymag<br><br>
+            A céklaketchuphoz:<br><br>
+            <br>180 g főtt cékla
+            <br>140 g sűrített paradicsom
+            <br>őrölt bors
+            <br>1 ek méz
+            <br>1 csipet chilipaprika
+            <br>1 tk füstölt fűszerpaprika
+            <br>1 csipet őrölt szegfűszeg
+            <br>1 tk fokhagymapor
+            <br>1 tk őrölt római kömény
+            <br>1 ek almaecet
+            <br>só<br><br>
+            Az összeállításhoz:<br><br>
+            1 fej lila hagyma
+            <br>1 ek olívaolaj
+            <br>só
+            <br>3 szelet grillezhető kecskesajt (100 g/szelet)
+            <br>2 db paradicsom (180 g)
+            <br>50 g rukkola
+          </h6>
+          <h3>Elkészítés:</h3>
+          <h6>1. A brokkoliburger bucijához a brokkolit rózsákra szedjük, és robotgépben felaprítjuk. Besózzuk, 5 percet állni hagyjuk, majd kinyomkodjuk a levét. 
+            <br>2. Egy másik tálban összekeverjük a liszteket a fokhagymaporral, a sörélesztőpehellyel és a sütőporral. Sózzuk borsozzuk, majd hozzáadjuk a keverékhez a brokkolit is. Jól összedolgozzuk, végül belekeverjük a tojásokat is, és homogén masszává gyúrjuk. Ha szükségesnek látjuk, egy kevés lisztet még adhatunk hozzá, hogy könnyebben formázható legyen. 
+            <br>3. Sütőpapírra helyezzük a vizes kézzel megformázott bucikat. Megszórjuk őket fekete köménymaggal, és 180 fokra előmelegített sütőben 35 perc alatt készre sütjük.
+            <br>4. A céklaketchuphoz a hozzávalókat egy magas falú edénybe tesszük, botmixerrel pürésítjük, és már készen is vagyunk.
+            <br>5. A lila hagymát felkarikázzuk, és egy serpenyőben, közepes lángon megpirítjuk az olívaolajon, közben sózzuk, majd félretesszük. Ugyanebben a serpenyőben megpirítjuk a kecskesajtokat is, és már csak az összeállítás van hátra. A bucikat kettévágjuk, megkenjük az aljukat a céklaketchuppal, erre jöhet a grillezett sajt, néhány karika paradicsom, még egy kevés céklaketchup, egy adag rukkola, a sült hagymakarikák, végül a buci teteje.
+          </h6>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="p-details">
+          <h2>Quinoás-csicseriborsós burrito avokádós mártogatóssal</h2>
+          <h3>Hozzávalók (4 főre):</h3>
+          <h6>1 konzerv csicseriborsó (400 g-os kiszerelés)
+            <br>2 tk fűszerpaprika
+            <br>2 tk fokhagyma-granulátum
+            <br>3 tk chilipor
+            <br>só, bors
+            <br>20 ml olívaolaj<br><br>
+            A zöldséges raguhoz:<br><br>
+            1 ek olívaolaj
+            <br>1 fej vöröshagyma (120 g/fej)
+            <br>2 gerezd fokhagyma
+            <br>1 csomag quinoás-csicseriborsós zöldségkeverék (250 g)
+            <br>90 ml paradicsomszósz
+            <br>só, bors
+            <br>1 csokor koriander<br><br>
+            A pico de gallóhoz:<br><br>
+            2 db paradicsom (90 g/db)
+            <br>1 fej vöröshagyma (120 g/fej)
+            <br>2 db jalapeno paprika
+            <br>1 db lime leve
+            <br>1 csokor friss koriander
+            <br>10 ml olívaolaj
+            <br>só, bors<br><br>
+            Az avokádós mártogatóshoz:<br><br>
+            2 db érett avokádó
+            <br>1 gerezd fokhagyma
+            <br>½ db lime leve
+            <br>120 ml növényi tej
+            <br>só, bors
+            <br>1 tk chilipor<br><br>
+            Az összeállításhoz:<br>
+            4 db tortillalap (30 cm-es)
+            <br>10 - 12 levél szívsaláta
+            <br>6 - 8 ek vegaföl</h6>
+          <h3>Elkészítés:</h3>
+          <h6>1. A csicseriborsó elkészítése:
+            <br>A quinoás-csicseriborsós burritohoz egy tálba öntjük a leszűrt, átmosott csicseriborsót, mehet rá a fűszerpaprika, a fokhagyma-granulátum, a chilipor, só és bors, majd meglocsoljuk az olívaolajjal. 
+            <br>Alaposan elkeverjük, egy sütőpapírral bélelt tepsire borítjuk. 200 fokra előmelegített sütőben 10-14 perc alatt ropogósra sütjük, félidőnél pedig átkeverjük spatulával, hogy mindenhol megsüljenek a kis csicseriborsóink. 
+            <br><br>2. Pico de gallo:<br>
+            A pico de gallóhoz nagyon apróra összevágjuk a paradicsomot, a hagymát, a jalapeno paprikát, és egy tálba öntjük. Meglocsoljuk a lime levével, beletesszük a felaprított koriandert, meglocsoljuk az olívaolajjal, sózzuk és borsozzuk, majd alaposan összekeverjük.
+            <br><br>3. A töltelék:<br>
+            A töltelékhez egy serpenyőben 1 evőkanál olíva olajat hevítünk, lepirítjuk benne az apróra vágott vöröshagymát és fokhagymát, majd beleöntjük a quinoás-csicseriborsós zöldségkeveréket és 1-2 percig pirítjuk. 
+            <br>Felöntjük a paradicsomszósszal, sózzuk, borsozzuk, és az apróra vágott korianderrel megszórjuk, majd összekeverjük, 3-4 perc alatt elkészítjük és félrerakjuk.
+            <br><br>4. A mártogatós:<br>
+            Egy aprítógépbe dobjuk a megpucolt avokádókat és a tunkolóhoz szükséges összetevőket, majd krémesre turmixoljuk.
+            <br><br>5. Az összeállítás:<br>
+            Ezután jöhet az összeállítás: egy nagyobb torillalapba halmozunk a quinoás-csicseriborsós töltelékből, jöhet rá 2 evőkanál pico de gallo, megszórjuk a ropogós csicseriborsóval, megy bele 2-3 levél szívsaláta és egy kevés vegaföl, majd feltekerjük a torillalapot. 
+            <br>Egy száraz, forró serpenyőben átpirítjuk minden oldalát, és már fogyasztható is, vagy ha elcsomagolnánk, akkor alufóliába bugyoláljuk, így már készen is áll az utazásra!
+          </h6>
+          <h3>Tápértékek:</h3>
+          <h6>Kalória: 557.68kcal
+            <br>Szénhidrát: 27.48g
+            <br>Zsír: 52.25g
+            <br>Fehérje: 4.22g
+          </h6>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="p-details">
+          <h2>Sütőben sült újburgonya</h2>
+          <h3>Hozzávalók (2 főre):</h3>
+          <h6>500 g újburgonya
+            <br>5 ek olívaolaj
+            <br>só, bors
+            <br>1 csokor petrezselyem
+          </h6>
+          <h3>Elkészítés:</h3>
+          <h6>A sütőben sült újburgonya akkor jó, ha kívül ropogós, belül pedig puha.
+            <br>Az elkészítéséhez az újburgonyát, ha nagyon vékony a héja, egy szivaccsal átdörzsöljük és átöblítjük, ha pedig kicsit vastagabb, zöldséghámozóval megtisztítjuk.
+            <br>Félbevágjuk őket, és egy tálba dobjuk.
+            <br>Meglocsoljuk olívaolajjal, mehet rá só és bors, majd egy sütőpapíros tepsibe szórjuk.
+            <br>Betoljuk a 180 fokra előmelegített sütőbe 40-45 percre, hogy szép ropogósra sülhessen a külseje, majd kivesszük a sütőből.
+            <br>A petrezselymet apróra vágjuk, megszórjuk vele a burgonyát, kicsit átforgatjuk, majd tálalhatjuk is
+            <br><br>Előkészítés: 10-15 perc
+            <br>Sütési idő: 40-45 perc
+            <br>Összesen: 50-60 perc</h6>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="p-details">
+          <h2>Spenótos minilángos kapros juhtúróval</h2>
+          <h3>Hozzávalók (13db):</h3>
+          <h6>450 g tisztított burgonya
+            <br>300 g friss spenót
+            <br>25 g só
+            <br>500 ml tej
+            <br>1 tk kristálycukor
+            <br>25 g friss élesztő
+            <br>1 kg finomliszt
+            <br>bő olaj a sütéshez
+            <br><br>A tálaláshoz:<br><br>
+            400 g juhtúró
+            <br>2 csokor kapor</h6>
+          <h3>Elkészítés:</h3>
+          <h6><br>1. A spenótos minilángos elkészítéséhez megtisztított burgonyát enyhén sós vízben puhára főzzük. Amikor megfőtt, négybe vágjuk, és hagyjuk, hogy a felesleges nedvesség eltávozzon belőle. Ez nagyon fontos mozzanat, hiszen nem szeretnénk, ha plusz nedvesség kerülne a tésztánkba víz formájában. 
+            <br>2. A spenótot bő, enyhén sós, lobogó vízben 3 percig főzzük, majd lecsepegtetjük, és alaposan kinyomkodjuk. Fontos, hogy tényleg minél szárazabbra nyomkodjuk, hiszen ha sok víz marad benne, az lényegesen befolyásolja a tészta állagát. Ha esetleg úgy látjuk, hogy nagyon lágy a tészta a nem kellőképp kinyomkodott spenóttól, akkor 1-2 evőkanál liszttel korrigálhatjuk. A spenótot konyhai aprítógép segítségével pépesítjük. 
+            <br>3. Míg a burgonya kigőzölög, egy keverőtál aljába mérjük a sót. Azért az aljába, mert ha az élesztő közvetlenül érintkezik a sóval, nem kel meg úgy a tészta. A tejet kb. 30-35 fokra melegítjük a cukorral, és belemorzsoljuk az élesztőt. A lisztet és a krumplinyomón áttört burgonyát is a keverőtálba tesszük, a spenóttal együtt, majd hozzáadjuk az élesztős tejet, és kézzel vagy dagasztógéppel szép egynemű tésztává dagasztjuk. Ha összeállt a tészta, egy konyharuhával letakarjuk, és langyos helyen 40-50 percig kelesztjük.
+            <br><br>A sütés:<br><br>
+            4. Amikor megkelt a tészta, enyhén átgyúrjuk, majd nagyjából 13 egyforma részre osztjuk, és kissé olajos kézzel kis gombócokat formázunk belőle. Konyharuhával letakarjuk őket, és hagyjuk ismét kelni 10-15 percet. Bő olajat hevítünk 170 fokra, majd a tésztákat a közepüktől kifelé haladva, folyamatosan húzva és forgatva kör alakúra formázzuk. Nem baj, ha a közepük szinte teljesen elvékonyodik és a szélük kicsit vastagabb. Oldalanként kb. 1 perc alatt szép aranybarnára sütjük a lángosokat. 
+            <br>5. Amikor megsültek, konyhai papírtörlővel leitatjuk róluk a felesleges olajat. A juhtúróban elkeverjük a finomra vágott kaprot, megkenjük vele a lángos tetejét, és tálaljuk.  
+            <br><br>Elkészítési idő: 50 perc
+            <br>Pihentetési idő: 75 perc
+            <br>Összesen: 125 perc</h6>          
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="p-details">
+          <h2>Nyers vegán csokis-narancsos trüffelgolyók</h2>
+          <h3>Hozzávalók (18-24 db):</h3>
+          <h6>200 gramm 70%-os étcsokoládé
+            <br>egy konzerv kókusztej (csak a sűrű teteje kell, ezt fölözd le, az alján álló vizet nem használjuk fel)
+            <br>két evőkanál kókuszzsír (a sima olaj és a margarin sem jó hozzá)
+            <br>egy evőkanál agaveszirup
+            <br>egy közepes narancs reszelt héja (legjobb, ha bio)
+            <br>két evőkanál cukrozatlan kakaópor
+            <br>egy csipet só</h6>
+          <h3>Elkészítés:</h3>
+          <h6><br>1. Először is vízgőz felett megolvasztjuk a csokit: ehhez egy kis lábasban melegíts vizet, és helyezd rá egy fémtálban a kis darabokra összetört csokit. A víz ne érjen a tál aljához, és ne lobogjon, csak gyöngyözzön. Folyamatosan kevergesd, amíg meg nem olvad, majd vedd le a tűzről.
+            <br>2. A kókusztejet melegítsd fel egy lábasban úgy, hogy ne forró, csak meleg legyen. Zárd el, öntsd át egy tálba, és keverd hozzá az olvasztott csokit, valamint egy evőkanál kókuszolajat, egy evőkanál agaveszirupot, egy narancs reszelt héját, és egy csipet sót.
+            <br>3. Tedd a fagyasztóba fél órára, vagy hűtőbe legalább másfél órára (erre feltétlen szükség van, hogy formázhatóra szilárduljon), majd formálj akkora golyókat, amekkorákat szeretnél. Végül forgasd bele őket cukrozatlan kakaóporba. Ha úgy érzed, a kezedtől nagyon megolvadnak a golyók, inkább tedd őket hűtőbe még tizenöt percre, mielőtt beleforgatod őket a kakaóba, különben túl sok fog rájuk ragadni. A hűtőben tartsd a kész trüffelgolyókat (egy hétig simán elállnak).
+            </h6>         
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="p-details">
+          <h2>Vegán tiramisu</h2>
+          <h3>Hozzávalók:</h3>
+          <h6>A piskótához:
+            <br><br>20 dkg liszt (1 + ¼ bögre)
+            <br>2 evőkanál agaveszirup**
+            <br>1 és ½ teáskanál vanília kivonat
+            <br>2 evőkanál olívaolaj + egy kevés a tepsihez
+            <br>2 teáskanál sütőpor
+            <br>1 késhegynyi szódabikarbóna
+            <br>2 teáskanál almaecet
+            <br>1 csipet só
+            <br>160 ml víz (⅔ bögre)<br><br>A krémhez:<br><br>
+            30 dkg kesudió (2 bögre)
+            <br>4 evőkanál agaveszirup
+            <br>120 ml növényi tej (½ bögre)
+            <br>2 evőkanál kókuszzsír
+            <br>1 teáskanál vanília kivonat
+            <br>1 csipet só<br><br>A locsoláshoz:<br><br>
+            1 bögre erős főzött kávé*
+            <br>2 evőkanál agaveszirup<br><br>A szóráshoz:<br><br>
+            jó minőségű cukrozatlan kakaópor</h6>
+          <h3>Elkészítés:</h3>
+          <h6>1. A piskótával kezdjük, aminél először is egy kis tepsiméretekre vonatkozó magyarázatra van szükség: egy réteg piskóta a tiramisu aljára fog kerülni, egy pedig a közepére, ezért vagy két db kb. 20×15 cm-es tepsiben/jénai tálban kell megsütnöd őket, vagy egy kb. 40×30 cm-es tepsiben, és utána kettévágni. A második megoldást csak akkor javaslom, ha tényleg van egy kisebb tepsid, amiben felépítheted a tiramisut, és egy olyanod, ami egészen pontosan kétszer akkora. Ha nincs két ugyanakkora méretű kicsi tepsid, semmi gond, gyorsan megsül a piskóta: ha kihűlt, vedd ki, olajozd ki újra a formát, és süsd meg a második adagot. (Ne aggódj azon, hogy egyben jöjjön ki a piskóta, egyáltalán nem fog változtatni a végeredményen, ha néhány helyen eltörik!)
+            <br>2. Most pedig jöjjön az elkészítés: ehhez először is melegítsd elő a sütőt 180 fokra, majd egy tálban keverj össze 100 gramm lisztet egy teáskanál sütőporral, egy késhegynyi szódabikarbónával és egy csipet sóval. Egy külön tálban keverj össze 80 ml vizet egy teáskanál vanília kivonattal, egy evőkanál sziruppal, egy evőkanál olívaolajjal és egy teáskanál almaecettel. A lisztes keveréket 2-3 részletben adagold hozzá a nedves hozzávalókhoz, és éppen csak keverd össze óvatos mozdulatokkal (nem szabad túlkeverni).
+            <br>3. Egy kisebb tepsit (lásd feljebb részletesebben) olajozz ki minden oldalán, majd simítsd el benne a piskótatészta felét. Csak akkor tedd be a sütőbe, ha a sütő már teljesen forró, és kb. 20 percig süsd (közben ne nyisd ki a sütőt résnyire sem). A piskóta második felével ugyanígy járj el.
+            <br>4. Miközben a piskóta sül, jöhet a krém: ehhez a kesudiót tedd food processorba vagy késes aprítóba (ha nincs más, botmixer is megteszi). Lehet, hogy több részletben kell majd összeaprítanod, ennek megfelelően oszd el a növényi tejet, a kókuszzsírt és az agaveszirupot is (tehát ha pl. három részletben tudod a kesudiót krémesíteni, a többi összetevőnek is az ⅓ részét tedd hozzá minden adaghoz). Legyél türelmes: annál jobb lesz a végeredmény, minél krémesebbre darálod a kesudiót. A végén alaposan keverd össze a külön-külön krémesített adagokat, és keverd hozzá a vanília kivonatot és egy csipet sót.
+            <br>5. A kávés locsoláshoz egyszerűen keverd össze a kávét az agavesziruppal. Ha a kávé és a piskóta is teljesen kihűlt, akkor a kávé felét szépen locsold rá az alsó réteg piskótára úgy, hogy mindenhova egyenlően jusson.
+            <br>6. Oszlasd el a kesukrém egyik felét a piskótán, szitálj rá (teaszűrővel) egy vékony réteg kakaóport, majd tedd a fagyasztóba 15 percre (ha nem fér be a fagyasztóba a formád, akkor hűtőbe tedd, legalább 45 percre).
+            <br>7. Erre a rétegre óvatosan helyezd rá a második réteg piskótát, majd oszlasd el rajta a kávészirup másik felét, végül pedig a kesukrém másik felét is. Erre is szitálj egy réteg kakaóport. Legalább négy órára tedd hűtőbe (tényleg megéri várni — mérföldekkel jobb lesz, mintha azonnal felvágnád, az ízét és az állagát tekintve is).
+            </h6>      
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="p-details">
+          <h2>Vegán rámen</h2>
+          <h3>Hozzávalók (4 adag):</h3>
+          <h6>1 l forrásban lévő víz
+            <br>20 g gyömbér, kis darabokra vágott
+            <br>4 gerezd fokhagyma, hámozva és darabokra vágva
+            <br>5 db újhagyma, csak a fehér részek
+            <br>2 db piros chilipaprika, darabokra vágva
+            <br>1 db póréhagyma, darabokra törve
+            <br>2 zeller rúd, darabokra törve
+            <br>1 alaplékocka, morzsolva
+            <br>1 evőkanál napraforgóolaj
+            <br>2 gerezd fokhagyma, vékonyra szeletelve
+            <br>1 piros chilipaprika, vékonyra szeletelt
+            <br>1 evőkanál szójaszósz
+            <br>1 evőkanál mirin
+            <br>3 evőkanál piros miszó paszta
+            <br>½ teáskanál só
+            <br>¼ teáskanál morzsolt chilipaprika
+            <br>8 db shittake gomba, vékonyra szeletelve
+            <br>1 db bordáskel, különválogatott levelekkel
+            <br>50 g újhagyma babcsírájának zöldje
+            <br>100 g fagyasztott csemegekukorica
+            <br>400 g kész rámentészta</h6>
+          <h3>Elkészítés:</h3>
+          <h6><br>1. A forrásban lévő vizet egy mély serpenyőbe tesszük úgy, hogy az alaplé minden hozzávalója benne van, majd főzni kezdjük. Lefedjük és 40-45 percig főzzük alacsony hőfokon. Ezt a levet egy másik serpenyőbe leszűrjük, majd félretesszük.
+            <br>2. A csomagoláson lévő utasítások szerint elkészítjük a tésztát, majd 4 tálra osztjuk.
+            <br>3. Egy másik serpenyőben olajat melegítünk, majd hozzáadjuk a chilipaprikát és a fokhagymát, és hagyjuk néhány másodpercig sisteregni. Ehhoz hozzáadjuk a szóját, a mirint, a sót, a chilit és a miszó pasztát, majd mindezeket jól összekeverjük. Beledobjuk a gombát, a bordáskelt, a babcsírákat, az újhagymákat és a csemegekukoricát. Egy percig nagy hőfokon főzzük.
+            <br>4. Ezt a zöldségkeveréket a 4 tálban lévő tésztára tesszük. A forrásban lévő alaplevet ráöntjük. Azonnal tálaljuk!
+            </h6>          
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="p-details">
+          <h2>Tepsiben sült kakukkfüves zöldségek</h2>
+          <h3>Hozzávalók (4 adag):</h3>
+          <h6>1 közepes db cukkini
+            <br>2 közepes db kápia paprika
+            <br>50 dkg csiperkegomba
+            <br>2 közepes db paradicsom
+            <br>20 dkg koktélparadicsom
+            <br>2 közepes db vöröshagyma
+            <br>2 közepes db lilahagyma
+            <br>só ízlés szerint
+            <br>1 csipet fekete bors (frissen őrölt)
+            <br>2 kk kakukkfű
+            <br>3 ek olívaolaj</h6>
+          <h3>Elkészítés:</h3>
+          <h6>1. A zöldségeket alaposan megmossuk.
+            <br>2. A cukkinit és a paprikát nagyobb kockákra, a gombát és a hagymákat cikkekre vágjuk. A koktélparadicsomokat félbevágjuk.
+            <br>3. Az előkészített zöldségeket (a paradicsomok kivételével) egy nagy tálban összekeverjük sóval, borssal, kakukkfűvel, és meglocsoljuk olívaolajjal. Kézzel alaposan összeforgatjuk, hogy az olaj és fűszerek átjárják a zöldségeket.
+            <br>4. Sütőpapírral bélelt tepsibe egyenletesen elrendezzük a zöldségeket, és ráhelyezzük a félbevágott koktélparadicsomokat is, majd 200 fokra előmelegített sütőben 20 percig sütjük.
+            </h6>        
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="p-details">
+          <h2>Sütőtökös zöldségtócsni</h2>
+          <h3>Hozzávalók (4 adag):</h3>
+          <h6>1db cukkini	
+            <br>só	
+            <br>1kg sütőtök	
+            <br>frissen őrölt bors	
+            <br>1 csok petrezselyem	
+            <br>1 csok snidling	
+            <br>2db tojás	
+            <br>2 dl olaj	
+            <br>20 dkg tejföl	
+            <br>1 csok újhagyma</h6>
+          <h3>Elkészítés:</h3>
+          <h6>1. A cukkinit megmossuk, a végeit levágjuk. Durvára reszeljük, megsózzuk, félretesszük. A sütőtököt meghámozzuk, kimagozzuk, és nagy lyukú reszelőn lereszeljük. Sóval, borssal, valamint a finomra vágott petrezselyemmel és snidlinggel ízesítjük. Végül hozzáadjuk a tojásokat és az alaposan kinyomkodott cukkinit, és pihentetjük 10 percig.
+            <br>2. Egy nagy serpenyőben felforrósítjuk az olajat, és egy evőkanállal kis kupacokat teszünk bele a zöldséges masszából. Nagyjából kör alakúra lapítjuk őket, és mindkét oldalukat aranysárgára sütjük. Mindet papírtörlőre szedjük.
+            <br>3. A tejfölt simára keverjük. Az újhagymát megtisztítjut, az egyiket felkarikázzuk, a többit finomra aprítjuk, és a a tejfölhöz forgatjuk. Az újhagymakarikákkal díszítjük és így kínáljuk a zöldségtócsnihoz. 
+            </h6>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="p-details">
+          <h2>Kapros-rizses-cukkinis lecsó</h2>
+          <h3>Hozzávalók (4 adag):</h3>
+          <h6>1 fej	vöröshagyma	
+            <br>2 gerezd fokhagyma	
+            <br>2db lecsópaprika	
+            <br>4db paradicsom	
+            <br>1db kisebb cukkini	
+            <br>1 dl passzírozott paradicsom	
+            <br>1 tk pirospaprika	
+            <br>só	
+            <br>frissen őrölt bors	
+            <br>0.5 csok kapor	
+            <br>néhány kakukkfű	
+            <br>10 dkg jázmin rizs</h6>
+          <h3>Elkészítés:</h3>
+          <h6>1. A kapros-rizses lecsó elkészítéséhez a megtisztított, felkockázott vörös-, és fokhagymát megpároljuk egy nagyobb, mélyebb serpenyőben, megszórjuk a pirospaprikával, elkeverjük. Hozzáadjuk a megmosott, felkarikázott paprikát és cukkinit, hozzáöntünk egy pici vizet és pár percig pároljuk.
+            <br>2. Utána hozzáadjuk a szeletelt paradicsomot, sózzuk, borsozzuk, rászórjuk az aprított kaprot és fűszerezzük még friss kakukkfű ágakkal és összefőzzük az egészet.
+            <br>3. Közben a rizst másfélszeres mennyiségű, enyhén sós vízben megfőzzük, majd a kész lecsóhoz keverjük. Tálalás előtt a kakukkfű ágakat kivesszük belőle. Kínáljunk mellé ízlés szerint pékárut.
+            </h6>         
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="p-details">
+          <h2>Gombás-borsós rizottó</h2>
+          <h3>Hozzávalók (4 adag):</h3>
+          <h6>olaj	
+            <br>2 fej vöröshagyma	
+            <br>3 gerezd fokhagyma	
+            <br>50 dkg gomba	
+            <br>1.5 bögre rizs	
+            <br>1 l alaplé	
+            <br>1 dl fehérbor	
+            <br>2 tk reszelt citromhéj	
+            <br>2 bögre zöldborsó	
+            <br>só
+            <br>bors
+            <br>1 tk bazsalikom	
+            <br>parmezán</h6>
+          <h3>Elkészítés:</h3>
+          <h6>1. A gombás borsós rizottó elkészítéséhez a serpenyőbe egy kevés olajat hevítünk. Hozzáadjuk a megtiszított, felszeletelt vöröshagymát és az apróra vágott fokhagymát, néhány percig pirítjuk, majd hozzáadjuk a gombaszeleteket.
+            <br>2. Ha levet eresztett a gomba, hozzáöntjük a rizst, kicsit pirítjuk, majd az egészet felöntjük fél liter zöldségalaplével, és kb. 10 percig főzzük.
+            <br>3. Hozzáöntjük a bort és a maradék alaplevelet, a citromhéjat és a borsót. Néhány percig főzzük. Ízlés szerint sózzuk, borsozzuk, majd hozzáadjuk a bazsalikomot.
+            <br>4. Az elkészült rizottót reszelt parmezánnal tálaljuk.
+            </h6>        
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="p-details">
+          <h2>Zöld vegán shakshuka</h2>
+          <h3>Hozzávalók (4 adag):</h3>
+          <h6>33.3 dkg spenót
+            <br>2.7 dl mandulatej (mandulatejszín)
+            <br>1.3 tk szódabikarbóna
+            <br>0.7 ek élesztőpehely (sörélesztőpehely)
+            <br>só ízlés szerint
+            <br>bors ízlés szerint
+            <br>2.7 ek olívaolaj
+            <br>1.3 db póréhagyma
+            <br>5.3 db újhagyma (1 nagy csokor)
+            <br>koriandermag ízlés szerint
+            <br>római kömény ízlés szerint
+            <br>chilipehely ízlés szerint
+            <br>1.3 db zöld kaliforniai paprika
+            <br>1.3 csokor petrezselyem
+            <br>40 g bulgur (3 csapott ek.)
+            <br>0.7 citromból nyert citromlé
+            <br>1.3 db avokádó
+            <br>koriander ízlés szerint</h6>
+          <h3>Elkészítés:</h3>
+          <h6>1. A mandulatejszínt 50 g spenóttal, a szódabikarbónával és a sörélesztőpehellyel egy késes aprítóban összeturmixoljuk. Sózzuk-borsozzuk és félretesszük. Szódabikarbónát azért ajánlott beletenni, hogy megmaradjon a zöldségek szép színe.
+            <br>2. A felkarikázott póréhagymát és újhagymát (a fehér, alsó részét) az olívaolajon üvegesre pároljuk. Hozzáadjuk a koriandert, a római köményt, a chilit, némi borsot, és az egészet picit lepirítjuk.
+            <br>3. Hozzáadjuk a csíkokra vágott kaliforniai paprikát és a maradék spenótot, és hagyjuk hogy kicsit összefonnyadjanak. Ekkor ráöntjük a spenótos mandulatejszínt, az egészet elkeverjük, és lefedve 15-20 percet pároljuk.
+            <br>4. Hozzákeverjük az aprított petrezselymet és némi újhagymazöldet, majd egymástól egyenlő távolságra rápakolunk 1-1 evőkanál bulgurt.
+            <br>5. A bulgurkupacokra egy kevés citromlevet és szükség esetén (ha a zöldjeink teljesen felszívták a mandulatejszínt) egy kevés vizet löttyintünk, majd lefedve pároljuk további 10 percet, amíg a bulgur megpuhul.
+            <br>6. Szeletelt avokádóval és frissen aprított korianderrel megszórva tálaljuk.
+            </h6>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="p-details">
+          <h2>Tojásos-avokádós reggeli taco</h2>
+          <h3>Hozzávalók (2 adag):</h3>
+          <h6>10 oz. dugóhúzó (rotini) tészta
+            <br>1/4 csésze extra szűz olívaolaj (osztva)
+            <br>3 gerezd fokhagyma (darált)
+            <br>1/4 csésze friss bazsalikom (apróra vágva)
+            <br>1/4 csésze friss petrezselyem (apróra vágva)
+            <br>1/4 csésze fenyőmag
+            <br>1/4 csésze parmezán sajttal (reszelt)
+            <br>1 evőkanál. citromlé
+            <br>Dash tengeri só vagy kóser só (ízlés szerint)
+            <br>Dash őrölt fekete bors (ízlés szerint)
+          </h6>
+          <h3>Elkészítés:</h3>
+          <h6>A tortilla lapokat megpirítjuk, az avokádót villával összenyomkodjuk és fűszerezzük sóval, borssal. Egy kevés olajon a tojásokból rántottát készítünk a spenót hozzáadásával. 
+            <br>A tortillára kenünk az avokádóból, mehet rá a rántotta fele, paradicsom és csípős szósz — a másik tortillával megismételjük ugyanezt és fogyaszthatjuk is. (Én a paradicsomot száraz, forró serpenyőben megsütöttem, de tökéletes lesz friss parival is.)
+            </h6>
+          <h3>Tápértékek:</h3>
+          <h6>Energia érték: 1078kcal
+            <br>Fehérje: 45g
+            <br>Szénhidrát: 83g
+            <br>Cukor: 9g
+            <br>Zsír: 58g
+            <br>Telített zsírsavak 14g
+            <br>Egyszeresen telítetlen 25g
+            <br>Többszörösen telítetlen 8g
+            <br>Koleszterin 948mg
+            <br>Rost 14g
+            <br>Só 3g
+            <br>Víz 291g
+            <br>Kalcium 201mg
+            <br>PHE 2239mg
+          </h6>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="p-details">
+          <h2>Spenótos-csicserborsós tikka masala</h2>
+          <h3>Hozzávalók (4 főre):</h3>
+          <h6>A raguhoz:<br><br>
+            3 ek olaj
+            <br>1 db piros chilipaprika (nagy)
+            <br>2 cm-nyi friss gyömbér
+            <br>1 fej hagyma
+            <br>2 gerezd fokhagyma
+            <br>só, bors
+            <br>4 ek sűrített paradicsom
+            <br>3 ek tikka masala fűszerkeverék
+            <br>2 konzerv csicseriborsó (kb. 600 g)
+            <br>200 ml kókuszkrém
+            <br>200 ml víz
+            <br>100 g friss spenót
+            <br><br>A rizshez:<br><br>
+            300 g jázmin rizs
+            <br>600 ml víz
+            <br>1 tk só</h6>
+          <h3>Elkészítés:</h3>
+          <h6>1. A rizst átmossuk, a vízzel és a sóval felforraljuk, majd alacsony lángon, fedő alatt puhára főzzük.
+            <br>2. A raguhoz az olajon megpirítjuk az apróra vágott chilit és gyömbért, rárakjuk a kétfajta apróra vágott hagymát, sózzuk, borsozzuk. 
+            <br>3. Ha megpuhult a hagyma, rárakjuk a sűrített paradicsomot és a fűszerkeveréket, és lepirítjuk. Ezután mehet rá a lecsepegtetett csicseriborsó, elkeverjük, felöntjük a kókuszkrémmel és a vízzel, felforraljuk, majd 10 percet rotyogatjuk. 
+            <br>4. A legvégén beledobjuk a spenótot, és elzárjuk. A rizzsel tálaljuk.
+            </h6>
+          <h3>Tápértékek:</h3>
+          <h6>Kalória: 1928.08kcal
+            <br>Szénhidrát: 343.27g
+            <br>Zsír: 47.12g
+            <br>Fehérje: 24.33g
+          </h6>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const search = () =>{
+    const searchbox = document.getElementById("search-item").value.toUpperCase();
+    const storeitems = document.getElementById("product-list")
+    const product = document.querySelectorAll(".product")
+    const pname = storeitems.getElementsByTagName("h2")
+
+    for (var i = 0; i < pname.length; i++) {
+        let match = product[i].getElementsByTagName('h2')[0];
+
+        if (match) {
+            let textvalue = match.textContent || match.innerHTML
+
+            if (textvalue.toUpperCase().indexOf(searchbox) > -1) {
+                product[i].style.display = "";
+            } else {
+                product[i].style.display = "none";
+            }
+        }
+    }
+}
+
+  </script>
+</body>
+
+</html>
