@@ -1,491 +1,405 @@
 <?php
-session_start();
-/*
-include("connection.php");
-include("functions.php");
+    session_start();
 
-$user_data = check_login($con);
-*/
+    include("connection.php");
+    include("functions.php");
 
-class ArrayList {
+    // Check login
+    if(!loggedIn()){
+        header("Location:rendeles.php?err=" . urlencode("Be kell jelentkeznie a megtekintéshez!!"));
+        exit();
+    }
 
-  public $list = array();
-  
-  
-  public function Add($obj)
-  {
-      array_push($this->list, $obj);
-  }
-  
-  public function Remove($key)
-  {
-      if(array_key_exists($key, $this->list))
-      {
-          unset($this->list[$key]);
-      }
-  }
-  
-  public function Size()
-  {
-      return count($this->list);
-  }
-  
-  public function IsEmpty()
-  {
-      return empty($this->list);
-  }
-  
-  public function GetObj($key)
-  {
-      if(array_key_exists($key, $this->list))
-      {
-          return $this->list[$key];
-      }
-      else
-      {
-          return NULL;
-      }
-  }
-  
-  public function GetKey($obj)
-  {
-      $arrKeys = array_keys($this->list, $obj);
-  
-      if(empty($arrKeys))
-      {
-          return -1;
-      }
-      else
-      {
-          return $arrKeys[0];
-      }
-  }
-  
-  }
-  
-  function multiplying($name){
-    $quan = "";
-    $result = $name * $quan;
-    return $result;
-}
-//if (.cart post ){  Add(valasztott);}
-
+    
 ?>
 
 <!DOCTYPE html>
 <html lang="hu">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="bootstrap-4.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="utf-8">
+    <title>Vegetár - Organic Food Website</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="vegetarsgr, vega" name="keywords">
+    <meta content="Preparing and ordering vegetarian meals" name="description">
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Lora:wght@600;700&display=swap"
+        rel="stylesheet">
 
-    <title>Profil</title>
-    <style>
-    body {
-        font-family: Arial;
-        font-size: 17px;
-        padding: 8px;
-        background-image: url(image/veg_rendeles_ph.jpg);
-    }
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
-    * {
-        box-sizing: border-box;
-    }
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
-    .row {
-        display: -ms-flexbox;
-        /* IE10 */
-        display: flex;
-        -ms-flex-wrap: wrap;
-        /* IE10 */
-        flex-wrap: wrap;
-        margin: 0 -16px;
-    }
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
-    .col-25 {
-        -ms-flex: 25%;
-        /* IE10 */
-        flex: 25%;
-    }
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
 
-    .col-50 {
-        -ms-flex: 50%;
-        /* IE10 */
-        flex: 50%;
-    }
-
-    .col-75 {
-        -ms-flex: 75%;
-        /* IE10 */
-        flex: 75%;
-    }
-
-    .col-25,
-    .col-50,
-    .col-75 {
-        padding: 0 16px;
-    }
-
-    .container {
-        background-color: #f2f2f2;
-        padding: 5px 20px 15px 20px;
-        border: 1px solid lightgrey;
-        border-radius: 20px;
-    }
-
-    input[type=text] {
-        width: 100%;
-        margin-bottom: 20px;
-        padding: 12px;
-        border: 1px solid #ccc;
-        border-radius: 20px;
-    }
-
-    label {
-        margin-bottom: 10px;
-        display: block;
-    }
-
-
-    .btn {
-        background-color: #04AA6D;
-        color: white;
-        border: none;
-        width: 100%;
-        border-radius: 20px;
-        cursor: pointer;
-        font-size: 17px;
-    }
-
-    .btn:hover {
-        background-color: #45a049;
-    }
-
-    hr {
-        border: 1px solid lightgrey;
-    }
-
-    /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other (also change the direction - make the "cart" column go on top) */
-    @media (max-width: 800px) {
-        .row {
-            flex-direction: column-reverse;
-
-        }
-
-        .col-25 {
-            margin-bottom: 20px;
-        }
-    }
-
-    .card2 {
-        margin: auto;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        transition: 0.3s;
-        align-content: center;
-        width: 40%;
-        align-items: center;
-        background-color: aqua;
-
-    }
-
-    .container2 {
-        padding: 2px 16px;
-        max-width: 960px;
-
-    }
-
-    .card {
-        margin: auto;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        transition: 0.3s;
-        align-content: center;
-        background-color: #36f46f;
-        width: 100%;
-    }
-
-    .card:hover {
-        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-    }
-
-
-    h2 {
-        margin: auto;
-    }
-
-    .lh-condensed {
-        line-height: 1.25;
-    }
-
-    .del {
-        height: 50px;
-        width: 50px;
-        cursor: pointer;
-        transition: opacity 1s;
-    }
-
-    </style>
+    <!-- Unique Stylesheet -->
+    <link href="css/buy.css" rel="stylesheet">
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-warning">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="fo.html">Vegetár</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
+    <!-- Spinner Start -->
+    <div id="spinner"
+        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" role="status"></div>
+    </div>
+    <!-- Spinner End -->
+
+    <!-- Navbar Start -->
+    <div class="container-fluid fixed-top px-0 wow fadeIn" data-wow-delay="0.1s">
+        <div class="top-bar row gx-0 align-items-center d-none d-lg-flex">
+            <div class="col-lg-6 px-5 text-start">
+                <small><i class="fa fa-map-marker-alt me-2"></i>Budapest Municipality Jonavos 173</small>
+                <small class="ms-4"><i class="fa fa-envelope me-2"></i>vegetarsgr@gmail.com</small>
+            </div>
+            <div class="col-lg-6 px-5 text-end">
+                <small>Follow us:</small>
+                <a class="text-body ms-3" href=""><i class="fab fa-facebook-f"></i></a>
+                <a class="text-body ms-3" href=""><i class="fab fa-twitter"></i></a>
+                <a class="text-body ms-3" href=""><i class="fab fa-linkedin-in"></i></a>
+                <a class="text-body ms-3" href=""><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+
+        <nav class="navbar navbar-expand-lg navbar-light py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
+            <a href="index.html" class="navbar-brand ms-4 ms-lg-0">
+                <img src="img/mango.jpg" class="fw-bold text-primary m-0" width="60px" height="40px" alt="logo">
+            </a>
+            <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse"
+                data-bs-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="recept.html">Receptek</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="rendeles.php">Rendelés</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="hozzavalo.php">Hozzávalók</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="kapcs.html">Kapcsolat</a>
-                    </li>
-                </ul>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto p-4 p-lg-0">
+                    <a href="index.html" class="nav-item nav-link active">Home</a>
+                    <a href="about.html" class="nav-item nav-link">Rólunk</a>
+                    <a href="hozzavalo.php" class="nav-item nav-link">Termékek</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Egyéb</a>
+                        <div class="dropdown-menu m-0">
+                            <a href="feature.php" class="dropdown-item">Menük</a>
+                            <a href="testimonial.html" class="dropdown-item">Értékelés</a>
+                        </div>
+                    </div>
+                    <a href="contact.php" class="nav-item nav-link">Kapcsolat</a>
+                </div>
+                <div class="d-none d-lg-flex ms-2">
+                    <a class="btn-sm-square bg-white rounded-circle ms-3" href="login.php">
+                        <small class="fa fa-user text-body"></small>
+                    </a>
+                    <a class="btn-sm-square bg-white rounded-circle ms-3" href="rendeles.php">
+                        <small class="fa fa-shopping-bag text-body"></small>
+                    </a>
+                    <a class="btn-sm-square bg-white rounded-circle ms-3" href="logout.php">
+                        <small class="fa fa-sign-out-alt"></small>
+                    </a>
+                </div>
             </div>
-    </nav>
+        </nav>
+    </div>
+    <!-- Navbar End -->
 
-    <?php $arrAlap = array(1000,1100,940,220,340,500,290,900,300,870,480,185,260,190,180,100,110,270,310,1200,1250,950,500,330,600,230,2500,550,450,1350,800,680,450,1100,100,1800,2400,610,780,1550,675,1120);
-    $hozzList = array("paradicsom (1 kg)","cukkini (1kg)","kígyóuborka (1 kg)","vöröshagyma (500g)","lilahagyma (500g)","csemege uborka (Huangro - 720g)","olajbogyó (Giana - 200g)","fokhagyma (500g)","Kaliforniai piros paprika (200g)","Avokádó (260g)","Spenót (Eisberg - 80g)","só (Konyha finom - 1 kg)","cukor (Koronás cukor - 1 kg)","liszt (Kunsági - 1 kg)","őrölt feketebors (Horváth Rozi - 20g)","bazsalikom (Horváth Rozi - 5g)","őrölt kömény (Horváth Rozi - 20g)","fokhagyma-granulátum (Kotányi - 20g)","őrölt szegfűszeg (Kotányi - 20g)","ketchup (Heinz - 460g)","majonéz (Heinz - 460ml)","mustár (Heinz - 445g)","fűszerpaprika (csípős, Kotányi, 50g)","Tikka masala fűszerkeverék (30g)","Sniding (20g)","Citrom (200g)","Ételízesítő (Vegeta - 1 kg)","szójaszósz (Kofa - 170g)","Citromlé (Olympos - 1l)","Koriander (1 csokor - 100g)","Étkezési lencse (1 kg)","Rukkola (1 doboz - 100g)","Cékla (1kg)","Csicseriborsó (500g)","Kapor (20g)","Kecskesajt (P180g)","Parmezán sajt (200g)","Olaj (Kunsági - 1l)","Tojás (Farm Tojás - 10 db)","Gomba (1 kg)","Rizs (Nagykun - 1 kg)","Alaplé (STAR - 1l)");
-     $valasList = array();
-     $arTermek = 0; 
-     $listHoss = count($valasList);
-     ?>
-    <div class="container">
+    <!-- Page Header Start -->
+    <div class="container-fluid page-header wow fadeIn" data-wow-delay="0.1s">
+        <div class="container">
+            <h1 class="display-3 mb-3 animated slideInDown">Rendelés</h1>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+    <!-- Navbar Order Start -->
+    <div class="container-fluid bg-light bg-icon container2">
         <div class="py-5 text-center">
             <h2>Fizetés véglegesítés</h2>
         </div>
+        <!-- Cart Start -->
+    
+        <div class="container" id="shopping-cart">
+            <!-- Emptying the Cart -->
+            <a id="btnEmpty" href="hozzavalo.php?action=empty">Kosár kiürítése</a>
+            <?php
+                if(isset($_SESSION["cart_item"])){
+                    $total_quantity = 0;
+                    $total_price = 0;
+            ?>
+            
+            <!-- Cart table Start -->
+            <table class="tbl-cart" cellpadding="10" cellspacing="1">
+                <tbody>
+                    <tr>
+                        <th style="text-align:left;">Név</th>
+                        <th style="text-align:left;">kód</th>
+                        <th style="text-align:right;" width="5%">Mennyiség</th>
+                        <th style="text-align:right;" width="10%">Egység ár</th>
+                        <th style="text-align:right;" width="10%">Ár</th>
+                    </tr>
+                    <!-- Cart table display final list Start -->
+                    <?php		
+                        foreach ($_SESSION["cart_item"] as $item){
+                            $item_price = $item["quantity"]*$item["price"];
+                    ?>
+                    <tr>
+                        <td><img src="<?php echo $item["image"]; ?>" class="cart-item-image"/>
+                        <?php echo $item["name"]; ?></td>
+                        <td><?php echo $item["code"]; ?></td>
+                        <td style="text-align:right;"><?php echo $item["quantity"]; ?></td>
+                        <td style="text-align:right;"><?php echo $item["price"]." Ft"; ?></td>
+                        <td style="text-align:center;"><?php echo number_format($item_price,2)." Ft"; ?></td>
+                    </tr>
+                    <?php
+                        $total_quantity += $item["quantity"];
+                        $total_price += ($item["price"]*$item["quantity"]);
+                        }
+                    ?>
+
+                    <!-- Cart Total price -->
+                    <form method="post" action="rendeles.php">
+                        <tr>
+                            <td colspan="2" align="right">Végösszeg:</td>
+                            <td align="right"></td>
+                            <td align="right" colspan="2"><strong><?php echo number_format($total_price, 2)." Ft"; ?></strong></td>                                                          
+                        </tr>
+                    </form>                        
+                    <!-- Cart table display final list End -->      
+                                         
+                </tbody>
+            </table>
+            <!-- Cart table End -->
+            <?php
+                } else {
+            ?>
+            <div class="no-records">Üres a kosár</div>
+            <?php 
+                }
+            ?>
+
+            <!-- Purchase total Start -->
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+                <span class="text-muted">Kosár tartalma: 
+                    <?php
+                    
+                        echo $total_quantity;
+                    
+                    ?>
+                </span>
+            </h4>
+            <!-- Purchase total End -->
+        </div>           
+    
+        <!-- Cart End -->
 
 
-        <div class="row">
-            <div class="col-md-4 order-md-2 mb-4">
-                <h4 class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="text-muted">Kosár tartalma</span>
-                    <span class="badge badge-secondary badge-pill"><?php echo $listHoss; ?></span>
-                </h4>
-                <ul class="list-group mb-3">
-                    <li class="list-group-item d-flex justify-content-between lh-condensed">
-                        <div>
+        <!-- Order personal Data Start -->
+        <div class="text-center col-md-8 order-md-1 container py-3 mb-3" style="width: 100%;">
+            <h4 class="mb-3 py-5 text-center">Szállítási cím</h4>
+            <form class="needs-validation" novalidate>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="firstName">Vezetéknév</label>
+                        <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                        <div class="invalid-feedback">Érvényes keresztnév szükséges.</div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="lastName">Keresztnév</label>
+                        <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+                        <div class="invalid-feedback">Érvényes vezetéknév szükséges.</div>
+                    </div>
+                </div>
 
-                            <h6 class="my-0">1. tétel</h6>
-                        </div>
-                        <span class="text-muted">12 Ft</span>
-                        <div class="del"><i class="fa fa-trash"></i>
-                        </div>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between lh-condensed">
-                        <div>
-                            <h6 class="my-0">2. tétel</h6>
-                        </div>
-                        <span class="text-muted">8 Ft</span>
-                        <div class="del"><i class="fa fa-trash"></i>
-                        </div>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between lh-condensed">
-                        <div>
-                            <h6 class="my-0">3. tétel</h6>
-                        </div>
-                        <span class="text-muted">5 Ft</span>
-                        <div class="del"><i class="fa fa-trash"></i>
-                        </div>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between bg-light">
-                        <div class="text-success">
-                            <h6 class="my-0">Promócios kód</h6>
-                            <small>#First23</small>
-                        </div>
-                        <span class="text-success">-5 Ft</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between">
-                        <span>Végösszeg (HUF)</span>
-                        <strong>20 Ft</strong>
-                    </li>
-                </ul>
-
-                <form class="card p-2">
+                <div class="mb-3">
+                    <label for="username">Felhasználónév</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Kedvezmény kód">
-                        <div class="input-group-append">
-                            <button type="submit" class="btn btn-secondary">-%</button>
+                        <input type="text" class="form-control" id="username" placeholder="Username" required>
+                        <div class="invalid-feedback" style="width: 100%;">
+                            Felhasználónév megadása kötelező.
                         </div>
                     </div>
-                </form>
-            </div>
-            <div class="col-md-8 order-md-1">
-                <h4 class="mb-3">Szállítási cím</h4>
-                <form class="needs-validation" novalidate>
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="firstName">Vezetéknév</label>
-                            <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
-                            <div class="invalid-feedback">
-                                Valid first name is required.
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="lastName">Keresztnév</label>
-                            <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
-                            <div class="invalid-feedback">
-                                Valid last name is required.
-                            </div>
-                        </div>
-                    </div>
+                </div>
 
-                    <div class="mb-3">
-                        <label for="username">Felhasználónév</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="username" placeholder="Username" required>
-                            <div class="invalid-feedback" style="width: 100%;">
-                                Your username is required.
-                            </div>
-                        </div>
+                <div class="mb-3">
+                    <label for="email">Email<span class="text-muted">(Választható)</span></label>
+                    <input type="email" class="form-control" id="email" placeholder="you@example.com">
+                    <div class="invalid-feedback">
+                        Kérjük, adjon meg egy érvényes e-mail címet a szállítási frissítésekhez.
                     </div>
+                </div>
 
-                    <div class="mb-3">
-                        <label for="email">Email <span class="text-muted">(Nem kötelező)</span></label>
-                        <input type="email" class="form-control" id="email" placeholder="you@example.com">
+                <div class="mb-3">
+                    <label for="address">Cím</label>
+                    <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+                    <div class="invalid-feedback">
+                        Kérjük, adja meg szállítási címét.
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="address2">Cím 2 <span class="text-muted">(Választható)</span></label>
+                    <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <label for="country">Ország</label>
+                        <select class="custom-select d-block w-100" id="country" required>
+                            <option value="">Ország...</option>
+                            <option>Magyar</option>
+                            <option>Olasz</option>
+                            <option>Litvánia</option>
+                            <option>Szlovákia</option>
+                        </select>
                         <div class="invalid-feedback">
-                            Please enter a valid email address for shipping updates.
+                            Kérjük, válasszon érvényes országot.
                         </div>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="address">Cím</label>
-                        <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+                    <div class="col-md-3 mb-3">
+                        <label for="zip">Irányítószám</label>
+                        <input max=999 type="text" class="form-control" id="zip" placeholder="" required>
                         <div class="invalid-feedback">
-                            Please enter your shipping address.
+                            Irányítószám szükséges.
                         </div>
                     </div>
+                </div>
 
-                    <div class="mb-3">
-                        <label for="address2">Cím 2 <span class="text-muted">(Optional)</span></label>
-                        <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
-                    </div>
+                <hr class="mb-4">
 
-                    <div class="row">
-                        <div class="col-md-5 mb-3">
-                            <label for="country">Ország</label>
-                            <select class="custom-select d-block w-100" id="country" required>
-                                <option value="">Ország...</option>
-                                <option>Magyar</option>
-                                <option>Olasz</option>
-                                <option>Litvánia</option>
-                                <option>Szlovákia</option>
-                            </select>
-                            <div class="invalid-feedback">
-                                Please select a valid country.
-                            </div>
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <label for="zip">Irányítószám</label>
-                            <input type="text" class="form-control" id="zip" placeholder="" required>
-                            <div class="invalid-feedback">
-                                Zip code required.
-                            </div>
-                        </div>
+                <h4 class="mb-3">Fizetés</h4>
+                <div class="d-block my-3">
+                    <div class="custom-control custom-radio">
+                        <input id="credit" onclick="check()" value="kartya" name="paymentMethod" type="radio" class="custom-control-input" checked required>
+                        <label class="custom-control-label" for="credit">Hitelkártya</label>
                     </div>
+                    <div class="custom-control custom-radio">
+                        <input id="debit" onclick="javascript:check();" name="paymentMethod" type="radio" class="custom-control-input" required>
+                        <label class="custom-control-label" for="debit">Utánvétel</label>
+                    </div>
+                </div>
 
-                    <hr class="mb-4">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label id="cc-name-text2" for="cc-name">Kártya tulajdonosa</label>
+                        <input onclick="check()" type="text" class="form-control" id="cc-name" placeholder="" required>
+                        <small id="cc-name-text" class="text-muted">Kártyán feltüntetett teljes név</small>
+                        <div class="invalid-feedback">
+                            Kártyán szereplő név kötelező
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label id="cc-number-text" for="cc-number">Kártya szám</label>
+                        <input onclick="check()" type="text" class="form-control" id="cc-number" placeholder="" required>
+                        <div class="invalid-feedback">
+                            Hitelkártya száma kötelező
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <label id="cc-expiration-text" for="cc-expiration">Lejárata</label>
+                        <input onclick="check()" min=2023 max=2100 type="number" class="form-control" id="cc-expiration" placeholder="" required>
+                        <div class="invalid-feedback">
+                            Lejárati dátum szükséges
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label id="cc-cvv-text" for="cc-cvv">CVC</label>
+                        <input onclick="check()" min=100 max=999 type="number" class="form-control" id="cc-cvv" placeholder="" required>
+                        <div class="invalid-feedback">
+                            Biztonsági kód szükséges
+                        </div>
+                    </div>
+                </div>
 
-                    <h4 class="mb-3">Fizetés</h4>
+                <hr class="mb-4">
+                <button name = "vegleg" class="btn btn-primary btn-lg btn-block" type="submit">Véglegesít</button>
+            </form>
+        </div>
+        <!-- Order personal Data End -->
+    </div>
+    <!-- Navbar Order End -->
 
-                    <div class="d-block my-3">
-                        <div class="custom-control custom-radio">
-                            <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked
-                                required>
-                            <label class="custom-control-label" for="credit">Credit card</label>
-                        </div>
-                        <div class="custom-control custom-radio">
-                            <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required>
-                            <label class="custom-control-label" for="debit">Debit card</label>
-                        </div>
-                        <div class="custom-control custom-radio">
-                            <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required>
-                            <label class="custom-control-label" for="paypal">PayPal</label>
-                        </div>
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark footer pt-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-3 col-md-6">
+                    <p> Hétfő: Zárva<br>
+                        Kedd: 15:00 - 23:00<br>
+                        Szerda: 06:00 - 22:00<br>
+                        Csütörtök: Zárva<br>
+                        Péntek: 14:00 - 23:00<br>
+                        Szombat: 01:00 - 23:00<br>
+                        Vasárnap: 01:00 - 23:00</p>
+                    <div class="d-flex pt-2">
+                        <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i
+                                class="fab fa-twitter"></i></a>
+                        <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i
+                                class="fab fa-youtube"></i></a>
+                        <a class="btn btn-square btn-outline-light rounded-circle me-0" href=""><i
+                                class="fab fa-linkedin-in"></i></a>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="cc-name">Kártya tulajdonosa</label>
-                            <input type="text" class="form-control" id="cc-name" placeholder="" required>
-                            <small class="text-muted">Kártyán feltüntetett teljes név</small>
-                            <div class="invalid-feedback">
-                                Name on card is required
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="cc-number">Kártya szám</label>
-                            <input type="text" class="form-control" id="cc-number" placeholder="" required>
-                            <div class="invalid-feedback">
-                                Credit card number is required
-                            </div>
-                        </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-light mb-4">Elérhetőségeink</h4>
+                    <p><i class="fa fa-map-marker-alt me-3"></i>Budapest Municipality Jonavos 173</p>
+                    <p><i class="fa fa-phone-alt me-3"></i>+361237317</p>
+                    <p><i class="fa fa-envelope me-3"></i>vegetarsgr@gmail.com</p>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-light mb-4">Gyors linkek</h4>
+                    <a class="btn btn-link" href="about.html">Rólunk</a>
+                    <a class="btn btn-link" href="contact.php">Kapcsolat</a>
+                    <a class="btn btn-link" href="altalanos_jog.html">Általános szerződési feltételek</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-light mb-4">Hírlevél</h4>
+                    <div class="position-relative mx-auto" style="max-width: 400px;">
+                        <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text" placeholder="Email">
+                        <a href="signup.php"
+                            class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">Regisztráció</a>
                     </div>
-                    <div class="row">
-                        <div class="col-md-3 mb-3">
-                            <label for="cc-expiration">Lejárata</label>
-                            <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
-                            <div class="invalid-feedback">
-                                Expiration date required
-                            </div>
-                        </div>
-                        <div class="col-md-3 mb-3">
-                            <label for="cc-cvv">CVV</label>
-                            <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
-                            <div class="invalid-feedback">
-                                Security code required
-                            </div>
-                        </div>
-                    </div>
-                    <hr class="mb-4">
-                    <button class="btn btn-primary btn-lg btn-block" type="submit">Véglegesít</button>
-                </form>
+                </div>
             </div>
         </div>
-
-        <footer class="my-5 pt-5 text-muted text-center text-small">
-            <p class="mb-1">Vegetár: Minden jog fentartva 2023</p>
-            <ul class="list-inline">
-                <li class="list-inline-item"><a href="altalanos_jog.html">Privacy</a></li>
-                <li class="list-inline-item"><a href="rolunk.html">Terms</a></li>
-                <li class="list-inline-item"><a href="kapcs.html">Support</a></li>
-            </ul>
-        </footer>
-    </div>
-
-
-    <div class="card2">
-        <h2>Felhasználó</h2>
-        <img src="image/avatar01.png" alt="Avatar">
-        <div class="container2">
-            <h4><b>
-                    <?php echo $user_data['username'];   ?>
-                </b></h4>
-            <h4><b>
-                    <?php echo $user_data['email'];   ?>
-                </b></h4>
-
+        <div class="container-fluid copyright">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        &copy; <a href="www.vegetarsgr.hu">Webhelyünk</a>, Minden jog fentartva 2023.
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <script>
+    <!-- Footer End -->
 
-    </script>
+    <!-- Back to Top -->
+    <a href="rendeles.php" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top">
+        <i class="bi bi-arrow-up"></i>
+    </a>
 
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
 
-
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+    
 </body>
-
 </html>

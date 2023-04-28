@@ -1,70 +1,21 @@
 <?php
     session_start();
-
 	include("connection.php");
 	include("functions.php");
-
-    function isUnique($email){
-        $query = "select * from user where email='$email'";
-        global $conn;
-        
-        $result = $conn->query($query);
-        
-        if($result->num_rows > 0){
-            return false;
-        }
-        else return true;
+    
+    // Check login
+    if(!loggedIn()){
+        header("Location:login.php?err=" . urlencode("Be kell jelentkeznie a fiók megtekintése lehetőséghez!!"));
+        exit();
     }
-
-    if(isset($_POST['register'])){
-        $_SESSION['username'] = $_POST['username'];
-        $_SESSION['email'] = $_POST['email'];
-        $_SESSION['password'] = $_POST['password'];
-        $_SESSION['pw2'] = $_POST['pw2'];
-        
-        if(strlen($_POST['username'])<5){
-            header("Location:signup.php?err=" . urlencode("A Felhasználónévnek legalább 5 karakter hosszúnak kell lennie"));
-            exit();
-        }
-       else if($_POST['password'] != $_POST['pw2']){
-            header("Location:signup.php?err=" . urlencode("A jelszó és a megerősítési jelszó nem egyezik"));
-            exit();
-       }
-        else if(strlen($_POST['password']) < 8){
-             header("Location:signup.php?err=" . urlencode("A jelszónak legalább 8 karakterből kell állnia"));
-            exit();
-        }
-      
-        else if(!isUnique($_POST['email'])){
-            header("Location:signup.php?err=" . urlencode("Az email már használatban van. Kérjük, használjon másikat"));
-            exit();
-        }
-       
-        else {
-            $user_name = mysqli_real_escape_string($conn , $_POST['username']);
-            $email = mysqli_real_escape_string($conn , $_POST['email']);
-            $password = mysqli_real_escape_string($conn , $_POST['password']);
-            $token = bin2hex(openssl_random_pseudo_bytes(32));
-            
-            $query = "insert into user (username,email,password,token) values('$user_name','$email','$password','$token')";
-            
-            $conn->query($query);
-            $message = "Üdvözöljük $user_name! Az itt létrehozott fiók az aktiválási link http://www.vegetarsgr.hu/activate.php?token=$token";
-            
-            mail($email , 'Aktiválja a fiókot' , $message , 'From: info_group@vegetarsgr.hu');
-            header("Location:login.php?success=" . urlencode("Aktiváló e-mail elküldve!"));
-            exit();
-        }    
-    }
-
-	
 ?>
 
 <!DOCTYPE html>
 <html lang="hu">
+
 <head>
     <meta charset="utf-8">
-    <title>Vegetár - Organic Food</title>
+    <title>Vegetár - Organic Food Website</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="vegetarsgr, vega" name="keywords">
     <meta content="Preparing and ordering vegetarian meals" name="description">
@@ -143,54 +94,86 @@
                     <a class="btn-sm-square bg-white rounded-circle ms-3" href="rendeles.php">
                         <small class="fa fa-shopping-bag text-body"></small>
                     </a>
+                    <a class="btn-sm-square bg-white rounded-circle ms-3" href="logout.php">
+                        <small class="fa fa-sign-out-alt"></small>
+                    </a>
                 </div>
             </div>
         </nav>
     </div>
     <!-- Navbar End -->
 
-    <!-- Page Header -->
-    <div class="container-fluid page-header wow fadeIn" data-wow-delay="0.1s">
-        <h3 class="text-center">Kérjük, töltse ki ezt az űrlapot fiók létrehozásához.</h3>
-    </div>
-    
-    <div class="container-fluid bg-light bg-icon">
+    <!-- Page Header Start -->
+    <div class="container-fluid page-header mb-5 wow fadeIn" data-wow-delay="0.1s">
         <div class="container">
-            <form  method="post">
-                <?php if(isset($_GET['err'])) { ?>
-                    <div class="alert alert-danger"><?php echo $_GET['err']; ?></div>
-                <?php } ?>
-                <hr>
-                <div class="form-group">
-                    <label>Felhasználónév</label>
-                    <input type="text" name="username" class="form-control" placeholder="Felhasználónév" value="<?php echo @$_SESSION['username']; ?>" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Email-cím</label>
-                    <input type="email" name="email" class="form-control" placeholder="Email-cím" value="<?php echo @$_SESSION['email']; ?>" required>
-                
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">Jelszó</label>
-                    <input type="password" name="password" class="form-control" placeholder="Jelszó" value="<?php echo @$_SESSION['password']; ?>" required>
-                
-                </div>
-                <div class="form-group">
-                    <label >Jelszó ismétlés</label>
-                    <input type="password" name="pw2" class="form-control" placeholder="Jelszó újra" value="<?php echo @$_SESSION['pw2']; ?>" required>
-                </div>
-                <button type="submit" name="register" class="btn btn-default">Regisztráció</button>            
-            </form>             
-            <a href="login.php">Bejelentkezés</a>       
+            <h1 class="display-3 mb-3 animated slideInDown">Értékelés</h1>
         </div>
     </div>
+    <!-- Page Header End -->
+
+    <!-- Contact Start -->
+    <form action="https://formsubmit.co/el/confirm/34fe31dd5b2297c399da7ad11b80ba89" method="POST">
+        <div class="container-xxl py-6">
+            <div class="container">
+                <div class="section-header text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s"
+                    style="max-width: 500px;">
+                    <h1 class="display-5 mb-3">Értékelés</h1>
+                    <p>Küldjön visszajelzéseket, amivel segíti a fejlődésünket.</p>
+                </div>
+                
+                <div class="row g-5 justify-content-center">
+                    
+                    <!-- User Data -->
+                    <div class="col-lg-7 col-md-12 wow fadeInUp" data-wow-delay="0.5s">
+                        <form>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="name" placeholder="Username " name="name" required>
+                                        <label for="name">Felhasználónév</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="email" class="form-control" id="email" placeholder="Email " name="email" required>
+                                        <label for="email">Email</label>
+                                    </div>
+                                </div>
+
+                                <!-- User message Start -->
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <textarea class="form-control" placeholder="Értékelés szövege... " id="message"
+                                            style="height: 200px" name="message" required></textarea>
+                                        <label for="message">Értékelés szövege...</label>
+                                    </div>
+
+                                    <input type="hidden" name="_captcha" value="false">
+                                    <input type="hidden" name="_template" value="table">                                                                              
+                                </div>
+                                <!-- User message End -->
+
+                                <!-- User ... -->
+                                <p>Névtelen megjelenítés a weboldalon.</p>                              
+                                
+                                <div class="col-12">
+                                    <button id="bu" class="btn btn-primary rounded-pill py-3 px-5" type="submit" >Küldés <i class="fa fa-envelope" aria-hidden="true"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>           
+        </div>
+    </form>
+    <!-- Contact End -->
 
     <!-- Footer Start -->
     <div class="container-fluid bg-dark footer pt-5 wow fadeIn" data-wow-delay="0.1s">
         <div class="container py-5">
             <div class="row g-5">
                 <div class="col-lg-3 col-md-6">
+                    <h4 class="text-light mb-4">Nyitvatartás</h4>
                     <p> Hétfő: Zárva<br>
                         Kedd: 15:00 - 23:00<br>
                         Szerda: 06:00 - 22:00<br>
@@ -210,7 +193,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
-                    <h4 class="text-light mb-4">Elérhetőségeink</h4>
+                    <h4 class="text-light mb-4">Elérhetőségek</h4>
                     <p><i class="fa fa-map-marker-alt me-3"></i>Budapest Municipality Jonavos 173</p>
                     <p><i class="fa fa-phone-alt me-3"></i>+361237317</p>
                     <p><i class="fa fa-envelope me-3"></i>vegetarsgr@gmail.com</p>
@@ -218,7 +201,6 @@
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-light mb-4">Gyors linkek</h4>
                     <a class="btn btn-link" href="about.html">Rólunk</a>
-                    <a class="btn btn-link" href="contact.php">Kapcsolat</a>
                     <a class="btn btn-link" href="altalanos_jog.html">Általános szerződési feltételek</a>
                 </div>
                 <div class="col-lg-3 col-md-6">
@@ -238,11 +220,17 @@
                     <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
                         &copy; <a href="www.vegetarsgr.hu">Webhelyünk</a>, Minden jog fentartva 2023.
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
     <!-- Footer End -->
+
+    <!-- Back to Top -->
+    <a href="contact.php" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top">
+        <i class="bi bi-arrow-up"></i>
+    </a>
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

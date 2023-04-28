@@ -1,63 +1,64 @@
 <?php
-    session_start();
 
-	include("connection.php");
-	include("functions.php");
+session_start();
+include("connection.php");
+include("functions.php");
 
-    function isUnique($email){
-        $query = "select * from user where email='$email'";
-        global $conn;
+function isUnique($email){
+    $query = "select * from user where email='$email'";
+    global $conn;
+    
+    $result = $conn->query($query);
+    
+    if($result->num_rows > 0){
+        return false;
+    }
+    else return true;
+}
+
+if(isset($_POST['reset_pass'])){
+    $_SESSION['username'] = $_POST['username'];
+    $_SESSION['email'] = $_POST['email'];
+    $_SESSION['password'] = $_POST['password'];
+    $_SESSION['pw2'] = $_POST['pw2'];
+    
+    if($_POST['password'] != $_POST['pw2']){
+        header("Location:reset_password.php?err=" . urlencode("A jelszó és a megerősítési jelszó nem egyezik"));
+        exit();
+    }
+    else if(strlen($_POST['password']) < 8){
+         header("Location:reset_password.php?err=" . urlencode("A jelszónak legalább 8 karakterből kell állnia."));
+        exit();
+    }
+  
+    else if(isUnique($_POST['email'])){
+        header("Location:reset_password.php?err=" . urlencode("Az email nincs használatban nálunk."));
+        exit();
+    }
+    else if(strlen($_POST['username']) < 8){
+        header("Location:reset_password.php?err=" . urlencode("A felhasználónév nincs regisztrálva."));
+        exit();
+    }
+   
+    else {
+        $user_name = mysqli_real_escape_string($conn , $_POST['username']);
+        $email = mysqli_real_escape_string($conn , $_POST['email']);
         
+        $query = "select * from user where email='$email' and username='$user_name'";
         $result = $conn->query($query);
-        
-        if($result->num_rows > 0){
-            return false;
-        }
-        else return true;
-    }
 
-    if(isset($_POST['register'])){
-        $_SESSION['username'] = $_POST['username'];
-        $_SESSION['email'] = $_POST['email'];
-        $_SESSION['password'] = $_POST['password'];
-        $_SESSION['pw2'] = $_POST['pw2'];
-        
-        if(strlen($_POST['username'])<5){
-            header("Location:signup.php?err=" . urlencode("A Felhasználónévnek legalább 5 karakter hosszúnak kell lennie"));
-            exit();
-        }
-       else if($_POST['password'] != $_POST['pw2']){
-            header("Location:signup.php?err=" . urlencode("A jelszó és a megerősítési jelszó nem egyezik"));
-            exit();
-       }
-        else if(strlen($_POST['password']) < 8){
-             header("Location:signup.php?err=" . urlencode("A jelszónak legalább 8 karakterből kell állnia"));
-            exit();
-        }
-      
-        else if(!isUnique($_POST['email'])){
-            header("Location:signup.php?err=" . urlencode("Az email már használatban van. Kérjük, használjon másikat"));
-            exit();
-        }
-       
-        else {
-            $user_name = mysqli_real_escape_string($conn , $_POST['username']);
-            $email = mysqli_real_escape_string($conn , $_POST['email']);
-            $password = mysqli_real_escape_string($conn , $_POST['password']);
-            $token = bin2hex(openssl_random_pseudo_bytes(32));
-            
-            $query = "insert into user (username,email,password,token) values('$user_name','$email','$password','$token')";
-            
-            $conn->query($query);
-            $message = "Üdvözöljük $user_name! Az itt létrehozott fiók az aktiválási link http://www.vegetarsgr.hu/activate.php?token=$token";
-            
-            mail($email , 'Aktiválja a fiókot' , $message , 'From: info_group@vegetarsgr.hu');
-            header("Location:login.php?success=" . urlencode("Aktiváló e-mail elküldve!"));
-            exit();
-        }    
-    }
 
-	
+        $query = "insert into user (password) values('$password')";
+        
+
+        $conn->query($query);
+        $message = "Köszönjük $user_name! Jelszavát frissitettük, kérem jelentkezzen be.\núj jelszava: $password";
+        
+        mail($email , 'Jelszó frissítés' , $message , 'From: info_group@vegetarsgr.hu');
+        header("Location:reset_password.php?success=" . urlencode("Jelszavát frissitettük!"));
+        exit();
+    }    
+}
 ?>
 
 <!DOCTYPE html>
@@ -89,7 +90,6 @@
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
 </head>
-
 <body>
     <!-- Spinner Start -->
     <div id="spinner"
@@ -148,12 +148,16 @@
         </nav>
     </div>
     <!-- Navbar End -->
-
-    <!-- Page Header -->
-    <div class="container-fluid page-header wow fadeIn" data-wow-delay="0.1s">
-        <h3 class="text-center">Kérjük, töltse ki ezt az űrlapot fiók létrehozásához.</h3>
-    </div>
     
+    <!-- Page Header Start -->
+    <div class="container-fluid page-header mb-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container">
+            <h1 class="display-3 mb-3 animated slideInDown">Jelszó csere</h1>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+
     <div class="container-fluid bg-light bg-icon">
         <div class="container">
             <form  method="post">
@@ -163,28 +167,29 @@
                 <hr>
                 <div class="form-group">
                     <label>Felhasználónév</label>
-                    <input type="text" name="username" class="form-control" placeholder="Felhasználónév" value="<?php echo @$_SESSION['username']; ?>" required>
+                    <input type="text" name="username" class="form-control" placeholder="Felhasználónév" required>
                 </div>
                 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email-cím</label>
-                    <input type="email" name="email" class="form-control" placeholder="Email-cím" value="<?php echo @$_SESSION['email']; ?>" required>
+                    <input type="email" name="email" class="form-control" placeholder="Email-cím" required>
                 
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Jelszó</label>
-                    <input type="password" name="password" class="form-control" placeholder="Jelszó" value="<?php echo @$_SESSION['password']; ?>" required>
+                    <input type="password" name="password" class="form-control" placeholder="Jelszó" required>
                 
                 </div>
                 <div class="form-group">
                     <label >Jelszó ismétlés</label>
-                    <input type="password" name="pw2" class="form-control" placeholder="Jelszó újra" value="<?php echo @$_SESSION['pw2']; ?>" required>
+                    <input type="password" name="pw2" class="form-control" placeholder="Jelszó újra" required>
                 </div>
-                <button type="submit" name="register" class="btn btn-default">Regisztráció</button>            
+                <button type="submit" name="reset_pass" class="btn btn-default">Jelszó csere</button>          
             </form>             
             <a href="login.php">Bejelentkezés</a>       
         </div>
     </div>
+    
 
     <!-- Footer Start -->
     <div class="container-fluid bg-dark footer pt-5 wow fadeIn" data-wow-delay="0.1s">
@@ -236,7 +241,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                        &copy; <a href="www.vegetarsgr.hu">Webhelyünk</a>, Minden jog fentartva 2023.
+                        &copy; <a href="#">Webhelyünk</a>, Minden jog fentartva 2023.
                     </div>
                 </div>
             </div>

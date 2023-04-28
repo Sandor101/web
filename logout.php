@@ -1,11 +1,9 @@
 <?php
+	session_start();
 
-session_start();
+	session_destroy();
 
-if(isset($_SESSION['user_ID']))
-{
-	unset($_SESSION['user_ID']);
-}
-
-header("Location: login.php");
-die;
+	setcookie("user_email" , "" , time()-60*5);
+	header("Location:login.php?success=" . urlencode("Sikeresen kijelentkezett!"));
+	exit();
+?>

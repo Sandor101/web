@@ -1,21 +1,9 @@
 <?php
 
-function check_login($con)
-{
-	if (isset($_SESSION['user_ID']))
-	{
-		$id = $_SESSION['user_ID'];
-		$query = "select * from user where user_ID = '$id'";
-		
-		$result = mysqli_query($con,$query);
-		if ($result && mysqli_num_rows($result)>0)
-		{
-			$user_data = mysqli_fetch_assoc($result);
-			return $user_data;
-		}
-	}
-	header("Location: login.php");
-	die;
+function loggedIn(){
+    if(isset($_SESSION['user_email']) || isset($_COOKIE['user_email'])){
+        return true;
+    }else return false;
 }
 
 function rnd($length)
@@ -37,3 +25,5 @@ function rnd($length)
 	
 	return $rn;
 }
+
+?>
